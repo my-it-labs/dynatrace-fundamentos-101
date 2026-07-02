@@ -225,7 +225,8 @@ La usarás en M04.
 
 | Síntoma | Qué significa en realidad | Qué hacer |
 |---------|---------------------------|-----------|
-| UI distinta a las capturas | Dynatrace renombra apps con frecuencia | Búsqueda global por nombre en inglés |
+| No veo categorías Apps/Settings en búsqueda | Panel abierto **sin escribir** nada | Escribe `Infrastructure` y mira la **columna izquierda** del modal |
+| Busco categorías en el Launcher de fondo | Están en el **modal** de búsqueda, no en Getting started | Abre Search y escribe; o usa enlaces **Open …** del dock |
 | «No data» / «Install OneAgent» | Normal en M01-02 | Sigue al **M03**; no es fallo tuyo |
 | Pantallas llenas de onboarding | Trial sin telemetría propia | Ignora «Add data» por ahora; foco en **navegar** |
 | No encuentro Preferences → Environment | Ruta antigua de la UI | Usa **Settings → General → Environment management** |
