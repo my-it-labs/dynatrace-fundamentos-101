@@ -81,28 +81,47 @@ Operations**, **Distributed Tracing** y **Logs** (nombres en inglés en la UI).
 
 ### 2 — Búsqueda global (tu GPS dentro de Dynatrace)
 
-**Acción:**
+**Acción — fase A: abrir (vacío = normal)**
 
-1. En el dock, haz clic en **Search** (lupa) **o** pulsa <kbd>Ctrl</kbd>+<kbd>K</kbd>
-   (<kbd>Cmd</kbd>+<kbd>K</kbd> en Mac).
-2. Se abre un panel central. Escribe `Infrastructure` (en inglés).
-3. En la columna izquierda del panel, mira las categorías: **Apps**, **Settings**, etc.
-4. Selecciona **Infrastructure & Operations** (categoría Apps).
-5. Pulsa **Open** o <kbd>Enter</kbd> para abrir la app.
-6. Cierra el panel con <kbd>Esc</kbd> si sigue visible.
+1. En el dock, clic en **Search** (lupa) **o** <kbd>Ctrl</kbd>+<kbd>K</kbd>.
+2. Aparece un **panel flotante** (modal) encima del Launcher. Verás:
+   - Arriba: caja **Search and navigate your environment**
+   - Centro: texto *«Quickly find your apps…»* / *«Start typing to see results…»*
+3. **En este momento NO verás «Apps», «Settings», etc.** — eso es **correcto**. Las categorías
+   **solo aparecen después de escribir**.
 
-**Qué es esto:** La búsqueda global no busca solo logs: navega **apps, ajustes y entidades** del
-tenant. Es la forma más fiable de llegar a un sitio cuando la UI cambia de nombre.
+![Búsqueda recién abierta — sin categorías todavía (normal)](../img/M01-02-busqueda-vacia.png)
 
-**Por qué:** En M04–M06 irás más rápido escribiendo el nombre de la app que recorriendo menús.
+**Acción — fase B: escribir y abrir una app**
 
-**Resultado esperado:** El panel muestra resultados agrupados; al elegir la app, ves detalle a la
-derecha y puedes abrirla.
+4. Escribe `Infrastructure` (en inglés).
+5. Mira la **columna izquierda** del panel de búsqueda (no el Launcher de fondo):
 
-![Búsqueda global — escribe Infrastructure](../img/M01-02-busqueda-global.png)
+| Zona del panel de búsqueda | Qué contiene |
+|----------------------------|--------------|
+| **Izquierda** | Resultados: **Apps (N)**, **Settings (N)**, Hub, Metrics… |
+| **Derecha** | Detalle del resultado + botón **Open** |
+| **Arriba** | Texto que escribiste |
 
-**Prueba tú (30 s):** Repite la búsqueda con `Logs` y con `Distributed Tracing`. Solo abre y
-cierra; no hace falta configurar nada.
+6. Bajo **Apps**, clic en **Infrastructure & Operations**.
+7. **Open** o <kbd>Enter</kbd>.
+8. <kbd>Esc</kbd> cierra el panel.
+
+**Qué es esto:** **Apps** y **Settings** son **etiquetas** que Dynatrace pone a los resultados de
+búsqueda, no menús del Launcher central.
+
+**Por qué:** Si abres Search y miras el centro **sin escribir**, no hay categorías — el lab no está
+mal; hay que **escribir** y mirar **a la izquierda** del modal.
+
+**Resultado esperado:** Tras escribir, bloque **Apps** con **Infrastructure & Operations** y puedes abrirlo.
+
+![Tras escribir Infrastructure — categorías a la izquierda](../img/M01-02-busqueda-global.png)
+
+> [!TIP]
+> **Atajo sin búsqueda:** en el **dock**, enlaces **Open Infrastructure & Operations**, **Open Logs**,
+> etc. — clic directo, mismo destino.
+
+**Prueba tú (30 s):** Repite con `Logs` y `Distributed Tracing`. Solo abrir y salir.
 
 ---
 
