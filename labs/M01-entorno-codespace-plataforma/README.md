@@ -3,8 +3,8 @@
 [← Página anterior](../../README.md) · [Siguiente página →](M01-01-bootstrap-entorno.md)
 
 > [!NOTE]
-> **Cómo funciona este módulo.** Primero la **teoría**, luego la **demostración guiada** del
-> formador, y después **practicas tú** en el/los laboratorio(s).
+> **Cómo funciona este módulo.** Lee la **teoría** y después los **laboratorios** paso a paso
+> (cada lab indica dónde actuar, qué validar y qué comprender).
 
 ## Qué aprenderás
 
@@ -55,7 +55,7 @@ Los scripts **no** usan tu usuario/contraseña de login. Necesitas **tres tokens
 |-------|-----|
 | PaaS | OneAgent en Docker (M03) |
 | API | Dynatrace Operator (M05) |
-| Ingest | Métricas/logs/trazas hacia Grail (M05) |
+| Ingest | Trazas OTel (M04) y Grail (M05) |
 
 > [!IMPORTANT]
 > No instalamos **Dynatrace Managed** en el Codespace. La plataforma vive en el trial SaaS; el
@@ -94,20 +94,6 @@ usamos **Launcher**.
 | Onboarding «Add data» | Paso obligado del lab | Es invitación del producto; en M01-02 **solo navegas** |
 | URL `.live.dynatrace.com` | URL `.apps.dynatrace.com` | Ambas son válidas según generación del tenant |
 | Demo/preview del trial | Tu stack `demo-web` | Tras M03 validarás **tu** host en Explorer |
-
-## Demostración guiada
-
-> Recorrido del formador (tono descriptivo).
-
-1. En GitHub, el repositorio del curso se abre en Codespaces desde el fork del alumno.
-2. En el tenant Dynatrace, la app **Kubernetes** o el asistente de **Add monitoring** muestra cómo
-   generar tokens Operator e ingest (para M05; no hace falta completarlo en M01).
-3. Tras `./scripts/lab-up.sh`, los servicios `demo-web` y `demo-api` quedan accesibles en los puertos
-   8080 y 8081 del Codespace — **aún no aparecen en Dynatrace** hasta M03.
-4. En la UI, el **Launcher** concentra accesos a infraestructura, trazas y logs; la **búsqueda
-   global** localiza apps aunque cambien de nombre entre versiones.
-
-![Launcher — apps del curso](../img/M01-02-launcher-hub.png)
 
 ## Ahora practica tú
 

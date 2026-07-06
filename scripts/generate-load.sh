@@ -3,7 +3,7 @@
 # generate-load.sh — Genera tráfico sintético contra demo-api (M04)
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
+# PROPÓSITO DEL LAB:
 #   Simular usuarios reales golpeando la API durante N segundos. Objetivo:
 #   poblar Dynatrace con servicios, trazas, latencia variable y errores para
 #   practicar Services, Problems, distributed traces y SLOs.
@@ -17,7 +17,7 @@
 #   /slow  → Respuesta deliberadamente lenta (problemas de rendimiento).
 #   /fail  → Devuelve error ~10% del tiempo (dispara Problems/alertas).
 #
-# DISCUSIÓN EN CLASE:
+# NOTAS:
 #   - ¿Por qué "|| true" en los curl? → No queremos abortar el bucle si /fail
 #     devuelve 500; el error ES el dato que queremos generar.
 #   - Tras ejecutar: ir a Dynatrace → Services → demo-api y Problems.

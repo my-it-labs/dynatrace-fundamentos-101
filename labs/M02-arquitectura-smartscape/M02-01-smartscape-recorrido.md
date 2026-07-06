@@ -70,7 +70,7 @@ Describe en una frase el camino que ves de host a PostgreSQL pasando por demo-ap
 
 ### 1 — Captura mental del mapa
 
-Sin hacer screenshot, anota los tres nodos más importantes para el formador en una demo de incidente (host, servicio/proceso crítico, base de datos).
+Sin hacer screenshot, anota los tres nodos más importantes en una respuesta a incidente (host, servicio/proceso crítico, base de datos).
 
 <details>
 <summary>Ver orientación</summary>

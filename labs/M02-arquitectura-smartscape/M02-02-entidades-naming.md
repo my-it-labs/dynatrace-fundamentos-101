@@ -39,8 +39,8 @@ Clasificas entidades del lab y configuras (o documentas) una convención de nomb
 ### 3 — Naming rule (intro)
 
 **Acción:** Abre **Settings → Monitoring → Host naming** (ruta equivalente). Revisa reglas existentes. Si tu tenant lo permite, añade un prefijo descriptivo o documenta en tus notas: `lab-<tu-usuario>`.
-**Por qué:** Evita ambigüedad cuando varios alumnos comparten tenant.
-**Resultado esperado:** Criterio de nombre documentado (regla aplicada o convención acordada con el formador).
+**Por qué:** Evita ambigüedad si compartís tenant en un mismo equipo.
+**Resultado esperado:** Criterio de nombre documentado (regla que aplicas tú).
 
 ### 4 — Management zone (visión)
 
@@ -73,4 +73,4 @@ Ejemplo: Host = VM Codespace; Process = python en contenedor demo-api; Service =
 |---------|----------------|-----------------|
 | No encuentro Host naming | UI actualizada | Busca «host naming» en global search |
 | Regla no aplica retroactivamente | Comportamiento normal | Cambio afecta a descubrimientos nuevos |
-| Veo hosts de otros alumnos | Tenant compartido | Filtra siempre por tu hostname |
+| Veo hosts de otras personas | Tenant compartido | Filtra siempre por tu hostname |

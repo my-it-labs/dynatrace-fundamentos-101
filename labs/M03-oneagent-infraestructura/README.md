@@ -3,7 +3,7 @@
 [← Página anterior](../M02-arquitectura-smartscape/M02-02-entidades-naming.md) · [Siguiente página →](M03-01-oneagent-compose.md)
 
 > [!NOTE]
-> **Cómo funciona este módulo.** Teoría → demostración guiada → laboratorios.
+> **Cómo funciona este módulo.** Teoría → laboratorios paso a paso.
 
 ## Qué aprenderás
 
@@ -55,15 +55,6 @@ loadgen → demo-web / demo-api → Postgres / Redis
 ### Límite didáctico (Codespace)
 
 OneAgent en contenedor observa **infra** (host, contenedores, nginx). **Deep monitoring** de `api.py` suele fallar por Docker anidado. M03-01 incluye un paso para **ver ese límite** antes de M04.
-
-## Demostración guiada
-
-> Recorrido del formador (tono descriptivo).
-
-1. Con la stack demo ya levantada (`./scripts/lab-up.sh`), se muestra en Hub → **OneAgent** → **Set up** → **Linux** la URL del instalador y el token PaaS.
-2. Esos valores se copian a `infra/.env`; el formador ejecuta `./scripts/oneagent-up.sh`.
-3. Tras unos minutos, en **Deployments → OneAgents** aparece el host del Codespace con estado **Connected**.
-4. En **Infrastructure → Hosts**, el host muestra CPU, memoria y contenedores Docker; al abrir un contenedor `demo-api` se ven procesos Python y conexiones a Postgres.
 
 ## Ahora practica tú
 

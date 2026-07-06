@@ -3,14 +3,14 @@
 # kind-down.sh — Elimina el clúster kind del laboratorio (M05)
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
+# PROPÓSITO DEL LAB:
 #   Destruir el clúster Kubernetes local "dynatrace-lab" y todos sus recursos
 #   (pods, Operator, DynaKube, workloads de demo). Libera CPU/RAM en Codespaces.
 #
 # USO:
 #   ./scripts/kind-down.sh
 #
-# DISCUSIÓN EN CLASE:
+# NOTAS:
 #   - kind delete cluster borra contenedores-nodo Docker; es irreversible.
 #   - Tras esto hay que volver a ejecutar kind-up.sh + operator-up.sh + k8s-lab-up.sh.
 #   - Contraste con lab-down.sh: aquí solo K8s; el stack Docker M01–M04 sigue vivo.

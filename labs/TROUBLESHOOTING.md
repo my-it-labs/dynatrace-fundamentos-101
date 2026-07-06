@@ -1,7 +1,6 @@
 # Troubleshooting — Dynatrace Fundamentos
 
-> Si un lab falla y la tabla rápida no basta, sigue la sección del módulo. Los pasos están pensados
-> para que **tú** diagnostiques (copiar/pegar comandos); el formador no necesita adivinar la causa.
+> Si un lab falla y la tabla rápida no basta, sigue la sección del módulo. Los pasos están pensados para que **tú** diagnostiques con comandos concretos.
 
 ## Stack Docker (M01)
 
@@ -93,7 +92,7 @@ Tras contenedor **Up** estable (2–5 min):
 |----------|----------|
 | Token PaaS inválido | Regenera en Access tokens (plantilla **PaaS**); actualiza `.env` |
 | Sin contenedores en UI | `lab-up.sh` activo + espera 5 min con OneAgent Connected |
-| `--privileged` denegado | Poco habitual en Codespaces; contacta formador |
+| `--privileged` denegado | Poco habitual en Codespaces; revisa política del entorno o abre issue en el repo del curso |
 
 ## OpenTelemetry / demo-api (M04)
 
@@ -111,7 +110,7 @@ Tras contenedor **Up** estable (2–5 min):
 |----------|----------|
 | UI distinta a capturas | Usa búsqueda global (<kbd>Ctrl</kbd>+<kbd>K</kbd>) por nombre de app |
 | Sin datos recientes | Verifica zona horaria del tenant; genera carga con `./scripts/generate-load.sh` |
-| Mezcla con otros alumnos | Filtra por hostname del Codespace |
+| Mezcla con otros entornos | Filtra por hostname del Codespace |
 
 ## Comandos útiles
 

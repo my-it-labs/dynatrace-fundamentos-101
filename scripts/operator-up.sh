@@ -3,7 +3,7 @@
 # operator-up.sh — Instala Dynatrace Operator + DynaKube en kind (M05)
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
+# PROPÓSITO DEL LAB:
 #   Automatizar el flujo de M05: desplegar el Operator de Dynatrace en K8s,
 #   esperar que esté Ready y aplicar un recurso DynaKube (CRD) que declara
 #   cómo conectar el clúster al tenant SaaS y cómo inyectar OneAgent en pods.
@@ -22,7 +22,7 @@
 #   3) Esperar deployment dynatrace-operator
 #   4) Sustituir variables en dynakube.yaml.tpl → kubectl apply
 #
-# DISCUSIÓN EN CLASE:
+# NOTAS:
 #   - Operator vs OneAgent Docker: patrón GitOps/K8s nativo vs host monitoring.
 #   - envsubst reemplaza ${DYNATRACE_*} del template antes de enviar a API server.
 # =============================================================================

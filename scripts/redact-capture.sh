@@ -3,14 +3,14 @@
 # redact-capture.sh — Oculta datos sensibles en capturas de pantalla Dynatrace
 # =============================================================================
 #
-# PROPÓSITO EN CLASE / MATERIAL DOCENTE:
-#   Antes de publicar screenshots del tenant en el repo o slides, tapar:
+# PROPÓSITO DEL LAB:
+#   Antes de publicar screenshots del tenant en el repo, tapar:
 #     - Esquina inferior izquierda: email / cuenta del usuario en el dock.
 #     - Esquina superior izquierda: icono de perfil / menú de usuario.
-#   Evita filtrar PII o identificar tenants de alumnos en material público.
+#   Evita filtrar PII o identificar tenants en material público.
 #
 # PRERREQUISITOS:
-#   - ImageMagick (comando `convert`) instalado en el sistema del formador.
+#   - ImageMagick (comando `convert`) instalado en el sistema.
 #
 # USO:
 #   ./scripts/redact-capture.sh labs/img/M01-02-*.png
@@ -21,7 +21,7 @@
 #   curso (1080p aprox.). Si cambia la resolución UI de Dynatrace, ajustar
 #   las coordenadas en los -draw 'rectangle x1,y1 x2,y2'.
 #
-# DISCUSIÓN EN CLASE:
+# NOTAS:
 #   - Buena práctica de seguridad al compartir observabilidad: redactar tenant,
 #     tokens, emails, nombres de clientes reales.
 # =============================================================================

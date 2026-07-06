@@ -3,8 +3,8 @@
 # lab-up.sh — Arranca el stack Docker del laboratorio (M01–M04)
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
-#   Punto de entrada principal del alumno para levantar la infraestructura local
+# PROPÓSITO DEL LAB:
+#   Punto de entrada principal dtú para levantar la infraestructura local
 #   del curso: demo-web, demo-api, PostgreSQL y Redis. Tras el arranque,
 #   ejecuta un health-check automático para confirmar que todo responde.
 #
@@ -24,7 +24,7 @@
 
 # --- Modo estricto de Bash ---------------------------------------------------
 # set -e  → Si cualquier comando falla (exit != 0), el script se detiene.
-#           Evita continuar con un stack a medias sin que el alumno se dé cuenta.
+#           Evita continuar con un stack a medias sin que tú se dé cuenta.
 # set -u  → Tratar variables no definidas como error (evita typos silenciosos).
 # set -o pipefail → En tuberías (cmd1 | cmd2), falla si cmd1 falla, no solo cmd2.
 set -euo pipefail
@@ -41,7 +41,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT/infra"
 
 # --- Bootstrap del archivo de configuración ----------------------------------
-# Si el alumno clona el repo por primera vez, infra/.env no existe todavía.
+# Si tú clona el repo por primera vez, infra/.env no existe todavía.
 # Copiamos la plantilla .env.example para que sepa qué variables rellenar
 # (DYNATRACE_ENVIRONMENT_URL, tokens API, etc.).
 if [[ ! -f .env ]]; then

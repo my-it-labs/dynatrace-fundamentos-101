@@ -3,7 +3,7 @@
 # k8s-lab-up.sh — Despliega workloads de demo en el clúster kind (M05)
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
+# PROPÓSITO DEL LAB:
 #   Tras tener kind + Operator, aplicar manifiestos YAML con una app de lab
 #   (deployment lab-web, Service, etc.) en namespace dynatrace-lab. Esas pods
 #   serán instrumentadas automáticamente por OneAgent vía Operator.
@@ -15,7 +15,7 @@
 # USO:
 #   ./scripts/k8s-lab-up.sh
 #
-# DISCUSIÓN EN CLASE:
+# NOTAS:
 #   - rollout status → espera a que el Deployment alcance mínimo de réplicas listas.
 #   - Comparar con lab-up.sh: mismo concepto de demo-web pero empaquetado en K8s.
 # =============================================================================

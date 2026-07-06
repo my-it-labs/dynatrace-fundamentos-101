@@ -3,8 +3,8 @@
 # health-check.sh — Diagnóstico rápido del lab Docker + conectividad HTTP
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
-#   Script de "smoke test" que el alumno (o lab-up.sh) ejecuta para confirmar:
+# PROPÓSITO DEL LAB:
+#   Script de "smoke test" que tú (o lab-up.sh) ejecuta para confirmar:
 #     1) Que infra/.env existe y tiene el tenant Dynatrace configurado.
 #     2) Que los contenedores Docker están UP.
 #     3) Que las apps responden en localhost.
@@ -12,7 +12,7 @@
 # USO:
 #   ./scripts/health-check.sh
 #
-# DISCUSIÓN EN CLASE:
+# NOTAS:
 #   - ¿Por qué comprobamos el tenant aunque este script no llame a la API DT?
 #     → Feedback temprano: si falta .env, OneAgent/Operator también fallarán.
 #   - curl -sf: -s silencioso, -f falla en HTTP 4xx/5xx (no "éxito falso").
@@ -38,7 +38,7 @@ else
   if [[ -z "${DYNATRACE_ENVIRONMENT_URL:-}" ]]; then
     echo "WARN: DYNATRACE_ENVIRONMENT_URL vacío en .env"
   else
-    # Mostramos el tenant para que el alumno verifique que apunta al trial correcto.
+    # Mostramos el tenant para que tú verifique que apunta al trial correcto.
     echo "OK: tenant configurado (${DYNATRACE_ENVIRONMENT_URL})"
   fi
 fi

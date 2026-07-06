@@ -3,7 +3,7 @@
 # lab-down.sh — Detiene y limpia el stack Docker del laboratorio (M01–M04)
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
+# PROPÓSITO DEL LAB:
 #   Apagar ordenadamente todos los contenedores del lab y liberar volúmenes
 #   persistentes (datos de PostgreSQL, Redis, etc.). Útil al final de la sesión
 #   o antes de un reset limpio.

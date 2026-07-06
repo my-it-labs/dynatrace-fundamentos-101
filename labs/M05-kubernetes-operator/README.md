@@ -3,7 +3,7 @@
 [← Página anterior](../M04-aplicaciones-trazas-problemas/M04-02-problems-davis.md) · [Siguiente página →](M05-01-kind-operator.md)
 
 > [!NOTE]
-> **Cómo funciona este módulo.** Teoría → demostración guiada → laboratorios.
+> **Cómo funciona este módulo.** Teoría → laboratorios paso a paso.
 >
 > Requiere Codespace con **≥ 8 GB RAM** y tokens **API** + **Ingest** en `infra/.env`.
 
@@ -34,15 +34,6 @@ En Kubernetes no instalas OneAgent manualmente en cada nodo: el **Dynatrace Oper
 | Ingest (metrics/logs/traces) | `DYNATRACE_INGEST_TOKEN` |
 
 Genera ambos desde la app **Kubernetes** → Add cluster → Other distributions, o Access tokens con scopes adecuados.
-
-## Demostración guiada
-
-> Recorrido del formador.
-
-1. `./scripts/kind-up.sh` crea `kind-dynatrace-lab`.
-2. `./scripts/operator-up.sh` instala Operator + DynaKube desde `infra/k8s/dynakube.yaml.tpl`.
-3. `./scripts/k8s-lab-up.sh` despliega nginx + loadgen en namespace `dynatrace-lab`.
-4. En Dynatrace **Kubernetes** app aparecen namespace, workloads y pods.
 
 ## Ahora practica tú
 

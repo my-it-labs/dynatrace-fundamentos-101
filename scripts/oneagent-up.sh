@@ -3,7 +3,7 @@
 # oneagent-up.sh — Despliega OneAgent como contenedor Docker full-stack (M03–M04)
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
+# PROPÓSITO DEL LAB:
 #   Instalar el agente Dynatrace en el *host* del Codespace (no dentro de cada
 #   contenedor de app). El contenedor oficial dynatrace/oneagent descarga el
 #   instalador desde el tenant usando PaaS token y monitoriza procesos/containers
@@ -20,7 +20,7 @@
 # USO:
 #   ./scripts/oneagent-up.sh
 #
-# DISCUSIÓN EN CLASE (flags de docker run):
+# NOTAS (flags de docker run):
 #   --privileged     → Acceso ampliado al host (requerido para full-stack monitoring).
 #   --pid=host       → Ve todos los procesos del host, no solo los del contenedor.
 #   --network=host   → Comparte stack de red del host (tráfico real de apps).

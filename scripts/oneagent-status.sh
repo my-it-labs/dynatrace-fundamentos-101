@@ -3,7 +3,7 @@
 # oneagent-status.sh — Estado y logs recientes del contenedor OneAgent
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
+# PROPÓSITO DEL LAB:
 #   Herramienta de troubleshooting cuando OneAgent no aparece en la UI de
 #   Dynatrace o tarda más de lo esperado. Muestra si el contenedor está Up y
 #   las últimas líneas del log (descarga instalador, conexión al tenant, errores
@@ -12,7 +12,7 @@
 # USO:
 #   ./scripts/oneagent-status.sh
 #
-# DISCUSIÓN EN CLASE:
+# NOTAS:
 #   - ¿Qué buscar en los logs? → "Connected", errores 401 (token), download OK.
 #   - Latencia normal hasta ver el host en Deployments → OneAgents: 2–5 minutos.
 # =============================================================================

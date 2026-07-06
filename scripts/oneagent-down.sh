@@ -3,7 +3,7 @@
 # oneagent-down.sh — Detiene y elimina el contenedor OneAgent (M03–M04)
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
+# PROPÓSITO DEL LAB:
 #   Apagar el agente full-stack desplegado con oneagent-up.sh. El host deja de
 #   reportar a Dynatrace; útil para demostrar "antes/después" o liberar recursos.
 #

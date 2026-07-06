@@ -23,7 +23,7 @@ Comprobaciones:
 | Servicio | Puerto | Rol |
 |----------|--------|-----|
 | `demo-web` | 8080 | Frontend nginx |
-| `demo-api` | 8081 | API Flask (starter); en **M04** el alumno añade OTel → OTLP |
+| `demo-api` | 8081 | API Flask (starter); en **M04** añades OTel → OTLP |
 | `postgres` | 5432 | Base de datos del lab |
 | `redis` | 6379 | Cache del lab |
 | `loadgen` | — | Generador de carga periódica |

@@ -3,7 +3,7 @@
 [← Página anterior](../M05-kubernetes-operator/M05-02-workloads-kubernetes.md) · [Siguiente página →](M06-01-dashboards-notebooks.md)
 
 > [!NOTE]
-> **Cómo funciona este módulo.** Teoría → demostración guiada → laboratorios.
+> **Cómo funciona este módulo.** Teoría → laboratorios paso a paso.
 
 ## Qué aprenderás
 
@@ -38,14 +38,6 @@ La sintaxis exacta puede variar según versión; usa el editor con autocompletad
 
 - **Management zones** — segmentan entidades por equipo/entorno.
 - **Maintenance windows** — suprimen alertas durante cambios planificados.
-
-## Demostración guiada
-
-> Recorrido del formador.
-
-1. Se crea un dashboard con tiles: response time demo-api, error rate, CPU host Codespace.
-2. En **Logs**, una consulta DQL filtra logs del contenedor demo-api o del namespace K8s.
-3. Se muestra una maintenance window de 15 min sobre el host de lab (demo).
 
 ## Ahora practica tú
 

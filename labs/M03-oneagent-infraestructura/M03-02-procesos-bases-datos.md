@@ -78,7 +78,7 @@ Vuelve a la métrica de throughput del proceso y confirma un pico.
 
 ### 1 — Etiqueta operativa
 
-Crea en Dynatrace un **host group** o convención de nombre (Settings → Monitoring → Host groups / naming) que identifique hosts de alumnos del curso, p. ej. prefijo `lab-`.
+Crea en Dynatrace un **host group** o convención de nombre (Settings → Monitoring → Host groups / naming), p. ej. prefijo `lab-`.
 
 <details>
 <summary>Ver orientación</summary>

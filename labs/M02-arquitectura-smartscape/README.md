@@ -3,7 +3,7 @@
 [← Página anterior](../M01-entorno-codespace-plataforma/M01-02-navegacion-ui.md) · [Siguiente página →](../M03-oneagent-infraestructura/README.md)
 
 > [!NOTE]
-> **Cómo funciona este módulo.** Teoría → demostración guiada → laboratorios.
+> **Cómo funciona este módulo.** Teoría → laboratorios paso a paso.
 >
 > **Orden recomendado:** lee la teoría de M02, completa **M03** (OneAgent) y después vuelve a los labs M02-01 y M02-02 con datos reales en Smartscape.
 
@@ -45,14 +45,6 @@ Host (Codespace)
 | Servidor Dynatrace | Alojado por Dynatrace | Instalado por el cliente |
 | Trial | Sí | Normalmente no |
 | Grail / funciones nuevas | Primero en SaaS | Dependiente de versión |
-
-## Demostración guiada
-
-> Recorrido del formador con OneAgent ya conectado (después de M03-01).
-
-1. Desde **Smartscape** o **Infrastructure**, se expande el host del Codespace hasta contenedores `demo-api` y `postgres`.
-2. Se muestran líneas de dependencia hacia PostgreSQL cuando el loadgen genera tráfico.
-3. Se contrasta la vista de **mapa/topología** con la lista de **Hosts** y **Processes**.
 
 ## Ahora practica tú
 

@@ -69,7 +69,7 @@ fetch logs
 
 ### 5 — Management zone (ubicación)
 
-**Acción:** Abre **Settings → Management zones**. Documenta en qué zona está tu host y si crearías una zona `lab-alumnos` en un tenant compartido.
+**Acción:** Abre **Settings → Management zones**. Documenta en qué zona está tu host y si crearías una zona `lab` en un tenant compartido.
 **Por qué:** Cierra el módulo operativo del curso básico.
 **Resultado esperado:** Sabes crear/asignar reglas de zona (aunque no la apliques en trial individual).
 

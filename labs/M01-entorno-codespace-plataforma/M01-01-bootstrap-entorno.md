@@ -44,7 +44,7 @@ validar con `health-check.sh`.
 
 **Acción:** Haz fork de `my-it-labs/dynatrace-fundamentos-101`, abre **Code → Codespaces → Create codespace on main**.
 
-**Por qué:** Cada alumno trabaja en su copia y conserva el material al finalizar.
+**Por qué:** Trabajas en tu propia copia y conservas el material al finalizar.
 
 **Resultado esperado:** Terminal en `/workspaces/dynatrace-fundamentos-101` (o nombre de tu fork).
 

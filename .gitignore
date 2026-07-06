@@ -10,5 +10,8 @@ propuesta.md
 diseno-pedagogico/
 curso.meta.json
 
+# Material de presentación interna (no forma parte del curso del repo)
+presentaciones/
+
 # Entorno local
 infra/.env

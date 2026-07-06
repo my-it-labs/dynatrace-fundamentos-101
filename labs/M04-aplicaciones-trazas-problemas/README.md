@@ -3,7 +3,7 @@
 [← Página anterior](../M02-arquitectura-smartscape/M02-02-entidades-naming.md) · [Siguiente página →](M04-01-servicios-trazas.md)
 
 > [!NOTE]
-> **Cómo funciona este módulo.** Teoría → demostración guiada → laboratorios.
+> **Cómo funciona este módulo.** Teoría → laboratorios paso a paso.
 
 ## Qué aprenderás
 
@@ -33,12 +33,6 @@ Un **span** es un paso (HTTP, query SQL, llamada Redis). Un **PurePath** es la c
 | `GET /work` | Baseline |
 | `GET /slow` | Latencia alta |
 | `GET /fail` | HTTP 500 |
-
-## Demostración guiada
-
-1. Alumno confirma límite OneAgent (M03) — solo nginx en Tracing.
-2. Alumno **implementa OTel** en `api.py` siguiendo M04-01 (paso a paso).
-3. Se contrastan Spans `demo-api` vs trazas nginx; waterfall `/work` con Redis y Postgres.
 
 ## Ahora practica tú
 

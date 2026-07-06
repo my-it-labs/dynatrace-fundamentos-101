@@ -3,7 +3,7 @@
 # kind-up.sh — Crea clúster Kubernetes local con kind (M05)
 # =============================================================================
 #
-# PROPÓSITO EN CLASE:
+# PROPÓSITO DEL LAB:
 #   Provisionar un clúster K8s ligero dentro de Docker para el módulo M05
 #   (Dynatrace Operator + inyección de OneAgent en pods). kind = "Kubernetes
 #   IN Docker": nodos son contenedores, ideal para Codespaces sin VM extra.

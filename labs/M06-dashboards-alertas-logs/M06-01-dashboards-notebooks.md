@@ -28,7 +28,7 @@ Añades tiles de métricas clave y guardas el dashboard en tu tenant.
 ### 1 — Crear dashboard
 
 **Acción:** Abre **Dashboards** → **Create dashboard**. Nombre sugerido: `Lab Dynatrace Fundamentos`.
-**Por qué:** Centraliza lo que el alumno reutilizará post-curso en su fork.
+**Por qué:** Centraliza lo que reutilizarás post-curso en tu fork.
 **Resultado esperado:** Dashboard vacío editable.
 
 ### 2 — Tile response time
