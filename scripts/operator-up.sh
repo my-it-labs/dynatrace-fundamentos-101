@@ -68,9 +68,12 @@ kubectl create namespace dynatrace --dry-run=client -o yaml | kubectl apply -f -
 # Manifiesto oficial publicado en GitHub Releases (CRDs, RBAC, Deployment operator).
 kubectl apply -f "https://github.com/Dynatrace/dynatrace-operator/releases/download/${OPERATOR_VERSION}/kubernetes.yaml"
 
-# --- Esperar que el Operator esté operativo ----------------------------------
+# --- Esperar que el Operator y el webhook estén operativos --------------------
+# DynaKube pasa por validating webhook; si aplica antes de que escuche :443 → connection refused.
 echo "Esperando operator..."
 kubectl -n dynatrace rollout status deployment/dynatrace-operator --timeout=180s
+echo "Esperando webhook..."
+kubectl -n dynatrace rollout status deployment/dynatrace-webhook --timeout=180s
 
 # --- Aplicar DynaKube (custom resource) ----------------------------------------
 # dynakube.yaml.tpl contiene placeholders ${DYNATRACE_ENVIRONMENT_URL}, tokens, etc.

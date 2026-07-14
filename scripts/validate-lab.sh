@@ -7,7 +7,8 @@
 #   ./scripts/validate-lab.sh          # comprobaciones generales (M01)
 #   ./scripts/validate-lab.sh m03      # + OneAgent
 #   ./scripts/validate-lab.sh m04      # + OTel en demo-api
-#   ./scripts/validate-lab.sh m05      # + kind + Operator
+#   ./scripts/validate-lab.sh m05      # M05 completo (Operator + workloads M05-02)
+#   ./scripts/validate-lab.sh m05-01   # solo M05-01 (kind + Operator; sin lab-web)
 #   ./scripts/validate-lab.sh all      # todo lo anterior
 #
 # Códigos de salida: 0 = OK o solo WARN; 1 = ERROR bloqueante
@@ -93,14 +94,18 @@ fi
 need_m03=false
 need_m04=false
 need_m05=false
+need_m05_workloads=false
 case "$CHECKPOINT" in
-  m03|m04|m05|all) need_m03=true ;;
+  m03|m04|m05|m05-01|all) need_m03=true ;;
 esac
 case "$CHECKPOINT" in
   m04|all) need_m04=true ;;
 esac
 case "$CHECKPOINT" in
-  m05|all) need_m05=true ;;
+  m05|m05-01|all) need_m05=true ;;
+esac
+case "$CHECKPOINT" in
+  m05|all) need_m05_workloads=true ;;
 esac
 
 # --- OneAgent (M03+) -----------------------------------------------------------
@@ -152,13 +157,14 @@ fi
 if $need_m05; then
   echo ""
   echo "-- Kubernetes + Operator (M05) --"
+  KCTX="kind-dynatrace-lab"
   command -v kind >/dev/null 2>&1 && pass "kind instalado" || fail "kind no instalado — postCreate o setup-codespace.sh"
   command -v kubectl >/dev/null 2>&1 && pass "kubectl instalado" || fail "kubectl no instalado"
   command -v envsubst >/dev/null 2>&1 && pass "envsubst instalado" || fail "envsubst no instalado — apt install gettext-base"
 
   if kind get clusters 2>/dev/null | grep -qx dynatrace-lab; then
     pass "clúster kind-dynatrace-lab existe"
-    if kubectl --context kind-dynatrace-lab get nodes 2>/dev/null | grep -q Ready; then
+    if kubectl --context "$KCTX" get nodes 2>/dev/null | grep -q Ready; then
       pass "nodo kind Ready"
     else
       fail "nodo kind no Ready"
@@ -167,16 +173,84 @@ if $need_m05; then
     fail "clúster kind-dynatrace-lab no existe — ./scripts/kind-up.sh"
   fi
 
-  if kubectl --context kind-dynatrace-lab -n dynatrace get dynakube dynatrace-lab 2>/dev/null | grep -q dynatrace-lab; then
+  if kubectl --context "$KCTX" -n dynatrace get dynakube dynatrace-lab 2>/dev/null | grep -q dynatrace-lab; then
     pass "DynaKube dynatrace-lab aplicado"
+    phase="$(kubectl --context "$KCTX" -n dynatrace get dynakube dynatrace-lab \
+      -o jsonpath='{.status.phase}' 2>/dev/null || true)"
+    if [[ "$phase" == "Running" ]]; then
+      pass "DynaKube phase=Running"
+    elif [[ -n "$phase" ]]; then
+      warn "DynaKube phase=$phase (esperado Running) — espera 5–10 min tras operator-up.sh"
+    else
+      warn "DynaKube sin phase aún — espera reconciliación del Operator"
+    fi
   else
     fail "DynaKube no encontrado — ./scripts/operator-up.sh"
   fi
 
-  if kubectl --context kind-dynatrace-lab -n dynatrace-lab get deploy lab-web 2>/dev/null | grep -q lab-web; then
-    pass "workload lab-web desplegado"
+  if kubectl --context "$KCTX" -n dynatrace get deployment dynatrace-operator 2>/dev/null | grep -q dynatrace-operator; then
+    op_ready="$(kubectl --context "$KCTX" -n dynatrace get deployment dynatrace-operator \
+      -o jsonpath='{.status.readyReplicas}' 2>/dev/null || echo 0)"
+    if [[ "${op_ready:-0}" -ge 1 ]]; then
+      pass "dynatrace-operator Ready"
+    else
+      fail "dynatrace-operator no Ready — kubectl -n dynatrace get pods"
+    fi
   else
-    warn "lab-web no desplegado — ./scripts/k8s-lab-up.sh"
+    fail "deployment dynatrace-operator no encontrado — ./scripts/operator-up.sh"
+  fi
+
+  if kubectl --context "$KCTX" -n dynatrace get deployment dynatrace-webhook 2>/dev/null | grep -q dynatrace-webhook; then
+    wh_ready="$(kubectl --context "$KCTX" -n dynatrace get deployment dynatrace-webhook \
+      -o jsonpath='{.status.readyReplicas}' 2>/dev/null || echo 0)"
+    if [[ "${wh_ready:-0}" -ge 1 ]]; then
+      pass "dynatrace-webhook Ready"
+    else
+      warn "dynatrace-webhook no Ready — si operator-up falló al aplicar DynaKube, espera webhook y re-aplica"
+    fi
+  else
+    warn "deployment dynatrace-webhook no encontrado"
+  fi
+fi
+
+# --- Workloads K8s (M05-02) ----------------------------------------------------
+if $need_m05_workloads; then
+  echo ""
+  echo "-- Workloads Kubernetes (M05-02) --"
+  KCTX="kind-dynatrace-lab"
+
+  if kubectl --context "$KCTX" -n dynatrace-lab get deploy lab-web 2>/dev/null | grep -q lab-web; then
+    pass "deployment lab-web existe"
+    want="$(kubectl --context "$KCTX" -n dynatrace-lab get deploy lab-web \
+      -o jsonpath='{.spec.replicas}' 2>/dev/null || echo 0)"
+    ready="$(kubectl --context "$KCTX" -n dynatrace-lab get deploy lab-web \
+      -o jsonpath='{.status.readyReplicas}' 2>/dev/null || echo 0)"
+    if [[ "${ready:-0}" -ge 2 && "${want:-0}" -ge 2 ]]; then
+      pass "lab-web ${ready}/${want} réplicas Ready"
+    else
+      fail "lab-web ${ready:-0}/${want:-0} réplicas Ready — ./scripts/k8s-lab-up.sh"
+    fi
+  else
+    fail "lab-web no desplegado — ./scripts/k8s-lab-up.sh"
+  fi
+
+  if kubectl --context "$KCTX" -n dynatrace-lab get deploy lab-loadgen 2>/dev/null | grep -q lab-loadgen; then
+    pass "deployment lab-loadgen existe"
+    lg_ready="$(kubectl --context "$KCTX" -n dynatrace-lab get deploy lab-loadgen \
+      -o jsonpath='{.status.readyReplicas}' 2>/dev/null || echo 0)"
+    if [[ "${lg_ready:-0}" -ge 1 ]]; then
+      pass "lab-loadgen Ready"
+    else
+      fail "lab-loadgen no Ready — kubectl -n dynatrace-lab describe pod -l app=lab-loadgen"
+    fi
+  else
+    fail "lab-loadgen no desplegado — ./scripts/k8s-lab-up.sh"
+  fi
+
+  if kubectl --context "$KCTX" -n dynatrace-lab get svc lab-web 2>/dev/null | grep -q lab-web; then
+    pass "service lab-web existe (puerto 80)"
+  else
+    fail "service lab-web no encontrado — ./scripts/k8s-lab-up.sh"
   fi
 fi
 

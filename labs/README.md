@@ -23,7 +23,8 @@ Si algo falla → [TROUBLESHOOTING.md](TROUBLESHOOTING.md) (diagnóstico paso a 
 | 4 | [M03](M03-oneagent-infraestructura/README.md) OneAgent | `./scripts/validate-lab.sh m03` |
 | 5 | [M02 labs](M02-arquitectura-smartscape/M02-01-smartscape-recorrido.md) Smartscape | `./scripts/oneagent-status.sh` |
 | 6 | [M04](M04-aplicaciones-trazas-problemas/README.md) OTel + Problems | `./scripts/validate-lab.sh m04` |
-| 7 | [M05](M05-kubernetes-operator/README.md) kind + Operator | `./scripts/validate-lab.sh m05` |
+| 7 | [M05-01](M05-kubernetes-operator/M05-01-kind-operator.md) kind + Operator | `./scripts/validate-lab.sh m05-01` |
+| 7b | [M05-02](M05-kubernetes-operator/M05-02-workloads-kubernetes.md) Workloads K8s | `./scripts/validate-lab.sh m05` |
 | 8 | [M06](M06-dashboards-alertas-logs/README.md) Dashboards + DQL | — |
 
 **Atascado en M04 (OTel)?** Red de seguridad: [labs/solutions/M04/](solutions/M04/) o `./scripts/apply-m04-otel-solution.sh`.

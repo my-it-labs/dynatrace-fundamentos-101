@@ -73,7 +73,7 @@ kubectl get nodes
 
 (Si `envsubst: command not found`, ejecuta `./scripts/setup-codespace.sh` primero.)
 
-**Por qué:** Aplica manifest oficial del Operator y plantilla DynaKube del curso.
+**Por qué:** Aplica manifest oficial del Operator y plantilla DynaKube del curso (modo **classicFullStack** adaptado a Codespace — ver teoría en [README](README.md)).
 **Resultado esperado:** Pods `dynatrace-operator` y componentes OneAgent/ActiveGate arrancando.
 
 ### 5 — Validar DynaKube
@@ -91,10 +91,10 @@ kubectl -n dynatrace get pods
 Validación local:
 
 ```bash
-./scripts/validate-lab.sh m05
+./scripts/validate-lab.sh m05-01
 ```
 
-(Aviso sobre `lab-web` es normal hasta M05-02.)
+(Aviso sobre workloads es normal hasta M05-02.)
 
 ## Comprueba tu entendimiento
 
@@ -115,7 +115,10 @@ Consulta la variable `DYNATRACE_OPERATOR_VERSION` (default `v1.6.0`) y localiza 
 | OOM / kind lento | RAM insuficiente | Codespace 8 GB+; cierra procesos |
 | DynaKube error tokens | Scopes incorrectos | Regenera API + Ingest desde app K8s |
 | `envsubst: command not found` | Falta gettext | `apt install gettext-base` |
-| apiUrl mal formada | URL con `/apps` | Usa `https://<id>.live.dynatrace.com` |
+| apiUrl mal formada | URL con `/ui/` | Usa `https://<id>.live.dynatrace.com` |
+| OneAgent CrashLoop + `volume host path` | `cloudNativeFullStack` en DinD | Repo usa `classicFullStack` + volumen off; `git pull` y `./scripts/operator-up.sh` |
+| DynaKube **Deploying** > 15 min | OneAgent/ActiveGate no Ready | `kubectl -n dynatrace get pods` + logs |
+| DynaKube webhook connection refused | Webhook aún no Ready | `kubectl -n dynatrace rollout status deployment/dynatrace-webhook` y re-aplica DynaKube |
 
 ## Referencia
 

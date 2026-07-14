@@ -86,11 +86,20 @@ echo "Desplegando OneAgent (puede tardar 1–3 min en la primera descarga)..."
 # En GitHub Codespaces el daemon Docker suele ser DinD: el volumen nombrado del
 # instalador falla con "volume host path ... does not exist on the host".
 # Ver labs/TROUBLESHOOTING.md — OneAgent (M03).
+_oneagent_is_dind_or_codespace() {
+  [[ -n "${CODESPACES:-}" ]] && return 0
+  [[ -n "${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN:-}" ]] && return 0
+  [[ -n "${CODESPACE_NAME:-}" ]] && return 0
+  # DinD en Codespace: el daemon no es el del host VM sino docker-host.sock
+  [[ -S /var/run/docker-host.sock ]] && return 0
+  return 1
+}
+
 USE_VOLUME_STORAGE="${ONEAGENT_ENABLE_VOLUME_STORAGE:-auto}"
 if [[ "$USE_VOLUME_STORAGE" == "auto" ]]; then
-  if [[ -n "${CODESPACES:-}" || -n "${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN:-}" ]]; then
+  if _oneagent_is_dind_or_codespace; then
     USE_VOLUME_STORAGE=false
-    echo "Codespace detectado: almacenamiento persistente OneAgent desactivado."
+    echo "Codespace/DinD detectado: almacenamiento persistente OneAgent desactivado."
   else
     USE_VOLUME_STORAGE=true
   fi

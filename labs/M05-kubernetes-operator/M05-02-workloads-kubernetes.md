@@ -54,6 +54,12 @@ kubectl -n dynatrace-lab get pods,svc
 **Por qué:** Valida descubrimiento de réplicas y servicio asociado.
 **Resultado esperado:** 2/2 pods ready monitorizados.
 
+Validación local al cerrar M05-02:
+
+```bash
+./scripts/validate-lab.sh m05
+```
+
 ### 5 — (Opcional) Smartscape K8s
 
 **Acción:** En Smartscape, localiza entidades **Kubernetes cluster** / **namespace** vinculadas al lab.

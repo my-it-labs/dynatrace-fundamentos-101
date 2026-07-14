@@ -19,7 +19,13 @@ spec:
   apiUrl: "${DYNATRACE_ENVIRONMENT_URL}/api"
   tokens: dynatrace-lab-tokens
   oneAgent:
-    cloudNativeFullStack: {}
+    # Codespace/kind (Docker-in-Docker): cloudNativeFullStack falla al resolver
+    # volúmenes en /opt/dynatrace (mountinfo). classicFullStack + volumen off
+    # es el equivalente al fix de M03 (ONEAGENT_ENABLE_VOLUME_STORAGE=false).
+    classicFullStack:
+      env:
+        - name: ONEAGENT_ENABLE_VOLUME_STORAGE
+          value: "false"
   activeGate:
     capabilities:
       - routing

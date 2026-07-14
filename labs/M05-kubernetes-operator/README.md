@@ -23,8 +23,16 @@ En Kubernetes no instalas OneAgent manualmente en cada nodo: el **Dynatrace Oper
 |------------|-----|
 | **Operator** | Control loop en namespace `dynatrace` |
 | **DynaKube** | CR con `apiUrl`, tokens, modo monitoring |
-| **OneAgent** (cloudNativeFullStack) | Monitoriza pods y nodos kind |
+| **OneAgent** (`classicFullStack` en el lab) | DaemonSet en nodos kind; sin volumen persistente (Codespace) |
 | **ActiveGate** | Capacidades K8s API, routing, etc. |
+
+### cloudNativeFullStack vs classicFullStack (Codespace)
+
+En producción (AKS, EKS, OpenShift) Dynatrace recomienda **`cloudNativeFullStack`** (CSI + inyección en pods).
+
+En **GitHub Codespaces**, kind corre dentro de **Docker-in-Docker**. OneAgent no puede resolver la ruta del volumen persistente (`Cannot determine volume host path from mountinfo`) — el mismo límite que en M03 con el contenedor OneAgent.
+
+El curso usa **`classicFullStack`** con `ONEAGENT_ENABLE_VOLUME_STORAGE=false` en `infra/k8s/dynakube.yaml.tpl`: mismo objetivo didáctico (Operator + nodos + workloads), compatible con el entorno del alumno.
 
 ### Tokens M05
 

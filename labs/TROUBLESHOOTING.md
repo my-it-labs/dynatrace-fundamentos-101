@@ -40,8 +40,14 @@ Si el log contiene:
 
 **Causa:** Docker-in-Docker del Codespace no soporta el volumen persistente del instalador.
 
-**Solución:** Usa la versión actual de `scripts/oneagent-up.sh` (detecta Codespace y desactiva el volumen).
-Si aún falla:
+**Solución:** Usa la versión actual de `scripts/oneagent-up.sh` (detecta Codespace/DinD y desactiva el volumen).
+Si aún falla, fija en `infra/.env`:
+
+```bash
+ONEAGENT_ENABLE_VOLUME_STORAGE=false
+```
+
+O despliega manualmente:
 
 ```bash
 ./scripts/oneagent-down.sh
@@ -93,6 +99,40 @@ Tras contenedor **Up** estable (2–5 min):
 | Token PaaS inválido | Regenera en Access tokens (plantilla **PaaS**); actualiza `.env` |
 | Sin contenedores en UI | `lab-up.sh` activo + espera 5 min con OneAgent Connected |
 | `--privileged` denegado | Poco habitual en Codespaces; revisa política del entorno o abre issue en el repo del curso |
+
+## Kubernetes / Operator (M05)
+
+Síntomas: DynaKube **Deploying** indefinido, pod `dynatrace-lab-oneagent-*` en **CrashLoopBackOff**, log:
+
+`Cannot determine volume host path from /proc/self/mountinfo` … `opt/dynatrace/…`
+
+**Causa:** **kind** dentro de **Docker-in-Docker** (Codespace). El modo **`cloudNativeFullStack`** (documentación genérica de Dynatrace) exige volúmenes en el nodo que DinD no resuelve — mismo tipo de límite que M03.
+
+**Solución del curso:** `infra/k8s/dynakube.yaml.tpl` usa **`classicFullStack`** con:
+
+```yaml
+env:
+  - name: ONEAGENT_ENABLE_VOLUME_STORAGE
+    value: "false"
+```
+
+Reaplicar tras `git pull`:
+
+```bash
+kubectl -n dynatrace rollout status deployment/dynatrace-webhook --timeout=180s
+set -a && source infra/.env && set +a
+export DYNATRACE_ENVIRONMENT_URL="${DYNATRACE_ENVIRONMENT_URL%/}"
+envsubst < infra/k8s/dynakube.yaml.tpl | kubectl apply -f -
+kubectl -n dynatrace get dynakube,pods
+```
+
+Esperado: DynaKube **Running**, OneAgent **1/1 Ready** (5–10 min).
+
+| Problema | Solución |
+|----------|----------|
+| Webhook connection refused al apply | Esperar webhook Ready antes de aplicar DynaKube |
+| Secret / tokens vacíos | `source infra/.env` antes de `envsubst` |
+| Sigue CrashLoop tras classicFullStack | Codespace &lt; 8 GB; Plan B: `applicationMonitoring` en DynaKube (sin DaemonSet en nodo) |
 
 ## OpenTelemetry / demo-api (M04)
 
