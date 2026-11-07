@@ -38,7 +38,7 @@ kubectl -n dynatrace-lab get pods,svc
 
 ### 2 — App Kubernetes en Dynatrace
 
-**Acción:** Abre la app **Kubernetes** (Hub o búsqueda global). Selecciona tu clúster kind / workload `dynatrace-lab`.
+**Acción:** Abre la app **Kubernetes** (dock o búsqueda global). En **Overview** verás contadores de clusters, nodos, namespaces y workloads (tardan 3–5 min en rellenarse). Ve a **Explorer → Workloads → Deployments**.
 **Por qué:** Vista consolidada de cluster → namespace → workload → pod.
 **Resultado esperado:** Namespace `dynatrace-lab` con deployments `lab-web` y `lab-loadgen`.
 

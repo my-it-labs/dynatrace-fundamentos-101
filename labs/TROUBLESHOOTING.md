@@ -141,7 +141,9 @@ Esperado: DynaKube **Running**, OneAgent **1/1 Ready** (5–10 min).
 | Sin spans `demo-api` | Regenera ingest token con `openTelemetryTrace.ingest`; comprueba sin caracteres extra al copiar |
 | OTLP 401 | `docker exec infra-demo-api-1 python -c "..."` — ver paso 3 en OneAgent troubleshooting o M04-01 |
 | Filtro `/work` en rojo | Usa **Service name** = `demo-api` y vista **Spans** |
-| Solo nginx en tracing | Filtro Process group nginx ≠ demo-api; son dos fuentes distintas |
+| Solo nginx en tracing | Service `localhost:80` (nginx, OneAgent) ≠ `demo-api` (OTel); son dos fuentes distintas |
+| Sin trazas de nginx | nginx arrancó antes que OneAgent (*Restart required*): `docker compose -f infra/docker-compose.yml restart demo-web` |
+| Traza `/work` sin span de Postgres | `api.py` importa `from psycopg2 import connect`; usa `import psycopg2` + `psycopg2.connect(...)` |
 | Rebuild tras cambiar código | `docker compose -f infra/docker-compose.yml up -d --build demo-api` |
 
 ## Dynatrace UI

@@ -34,27 +34,29 @@ Navegas desde el host del Codespace hasta procesos y dependencias, identificando
 
 | | |
 |-|-|
-| **Dónde** | Dynatrace → <kbd>Ctrl</kbd>+<kbd>K</kbd> |
-| **Acción** | Escribe `Smartscape` y abre la app. Si no aparece, prueba `Topology` o **Infrastructure & Operations** → pestaña **Smartscape** / mapa. |
+| **Dónde** | Dynatrace → <kbd>Ctrl</kbd>+<kbd>K</kbd> → `Smartscape` |
+| **Acción** | Abre la app **Smartscape** → vista ready-made **Infrastructure overview** |
 | **Para qué** | Smartscape muestra relaciones dinámicas, no solo listas aisladas |
-| **Validar** | Vista de mapa o grafo de entidades |
+| **Validar** | Grafo con un nodo de región (p. ej. `westeurope · 1 HOST`) |
 | **Comprender** | Es la misma topología que verás en incidentes reales |
 
-**Acción (continuación):** En el filtro o buscador del mapa, localiza el **host** de tu Codespace (nombre `codespaces-…` o similar al hostname de Infrastructure).
+**Acción (continuación):** Haz doble clic en la región para expandirla hasta el **host**.
 
-**Resultado esperado:** Nodo de host visible con entidades hijas.
+**Resultado esperado:** Nodo de host. Ojo: aquí aparece con el **identificador de la VM**
+(`c498fdee-…`), no con el nombre `codespaces-…` que ves en **Infrastructure & Operations**.
+Es la misma máquina: dos atributos distintos de la misma entidad.
 
-### 2 — Expandir contenedores
+### 2 — Contenedores y procesos del host
 
-**Acción:** Expande el host hasta ver contenedores del Compose (`demo-api`, `postgres`, `redis`, `demo-web`).
+**Acción:** Abre **Infrastructure & Operations → Hosts →** tu host `codespaces-…` → pestaña **Containers** y luego **Processes**.
 **Por qué:** Confirma que OneAgent mapea Docker al modelo de entidades Dynatrace.
-**Resultado esperado:** Al menos cuatro contenedores del lab bajo el mismo host.
+**Resultado esperado:** Contenedores `infra-demo-api-1`, `postgres`, `redis`, `nginx` y procesos `api.py`, `Postgres`, `Redis`, `nginx`.
 
-### 3 — Seguir dependencia hacia Postgres
+### 3 — ¿Y la dependencia demo-api → Postgres?
 
-**Acción:** Desde el nodo de **demo-api** (proceso o contenedor), sigue la dependencia hacia **PostgreSQL** si aparece en el mapa.
-**Por qué:** Anticipa el análisis de trazas de extremo a extremo en M04.
-**Resultado esperado:** Arista o enlace demo-api → Postgres (puede tardar unos minutos con carga).
+**Acción:** Abre **Smartscape → Service dependency graph**. Fíjate en qué servicios aparecen y si hay aristas entre ellos.
+**Por qué:** En el Codespace la monitorización de red de OneAgent (NetTracer) está desactivada y Flask aún no está instrumentado, así que el mapa **no** dibuja la llamada a Postgres.
+**Resultado esperado:** Servicios sueltos (`localhost:80`, …) sin aristas hacia la base de datos. La dependencia la verás en **M04** como span `SELECT` dentro de la traza `GET /work`.
 
 ### 4 — Correlacionar con tráfico
 
@@ -64,14 +66,14 @@ Navegas desde el host del Codespace hasta procesos y dependencias, identificando
 for i in $(seq 1 30); do curl -sf http://127.0.0.1:8081/work >/dev/null; done
 ```
 
-Refresca Smartscape y observa actividad en demo-api.
-**Por qué:** Valida que el mapa refleja carga real, no solo inventario estático.
-**Resultado esperado:** Indicador de actividad/reciente en demo-api tras el bucle.
+Vuelve a la pestaña **Processes** del host y observa CPU de `api.py`, `Postgres` y `Redis`.
+**Por qué:** Valida que la topología refleja carga real, no solo inventario estático.
+**Resultado esperado:** Subida visible de CPU/red en esos procesos tras el bucle.
 
 ## Comprueba tu entendimiento
 
 **Camino host → DB**
-Describe en una frase el camino que ves de host a PostgreSQL pasando por demo-api.
+Describe en una frase el camino host → demo-api → PostgreSQL según `infra/docker-compose.yml` y lo que viste en Processes.
 → Secuencia lógica coherente con `infra/docker-compose.yml`.
 
 ## Reto
@@ -92,5 +94,5 @@ Ejemplo: host Codespace → demo-api (Python) → PostgreSQL; Redis como depende
 | Síntoma | Causa probable | Cómo arreglarlo |
 |---------|----------------|-----------------|
 | Mapa vacío | OneAgent no conectado | Repite M03-01 |
-| Sin aristas a Postgres | Poca carga o delay | Ejecuta bucle curl y espera 3–5 min |
+| Sin aristas a Postgres | Normal en Codespace (sin NetTracer ni OTel aún) | Lo verás en M04 como span `SELECT` |
 | Nombres `infra-*` confusos | Prefijo de proyecto Compose | Normal; filtra por `demo` o `postgres` |

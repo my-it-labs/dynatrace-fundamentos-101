@@ -30,49 +30,68 @@ Añades tiles de métricas clave y guardas el dashboard en tu tenant.
 | | |
 |-|-|
 | **Dónde** | <kbd>Ctrl</kbd>+<kbd>K</kbd> → **Dashboards** |
-| **Acción** | **Create dashboard** → nombre `Lab Dynatrace Fundamentos` |
+| **Acción** | **New dashboard** (arriba a la derecha) → pulsa el título «Untitled dashboard» y renómbralo `Lab Dynatrace Fundamentos` |
 | **Para qué** | Centralizar métricas del lab en una sola vista |
-| **Validar** | Lienzo vacío con botón **Add tile** / **Add chart** |
+| **Validar** | Lienzo vacío «Start assembling your dashboard» y botón azul **+** |
 | **Comprender** | Un dashboard es operación; un notebook es análisis ad hoc (M06 teoría) |
 
-### 2 — Tile response time
+> En la app actual **todos los tiles son consultas DQL** (o asistentes Metrics/Logs que generan DQL).
+> En cada paso: **+** → **DQL** → pega la consulta → **Run** → elige visualización.
+
+### 2 — Tile tiempo de respuesta
 
 | | |
 |-|-|
-| **Dónde** | Dashboard → **Add tile** |
-| **Acción** | Tipo **Service** o **Metric** → servicio **`demo-api`** → métrica **Response time** → timeframe **Last 30 minutes** |
+| **Dónde** | Dashboard → **+** → **DQL** |
+| **Acción** | Pega la consulta de abajo · timeframe **Last 30 minutes** · visualización **Line** |
 | **Para qué** | Detectar regresiones como `/slow` de M04 |
-| **Validar** | Gráfico con puntos si hubo tráfico reciente (`./scripts/generate-load.sh`) |
-| **Comprender** | Sin tráfico el tile puede estar vacío — no es error del dashboard |
+| **Validar** | Línea con puntos si hubo tráfico reciente (`./scripts/generate-load.sh`) |
+| **Comprender** | `duration` va en **nanosegundos** (800M ≈ 0,8 s). Sin tráfico el tile puede estar vacío — no es error del dashboard |
 
-### 3 — Tile error rate
+```sql
+fetch spans
+| filter service.name == "demo-api" and request.is_root_span == true
+| makeTimeseries tiempo_medio = avg(duration), p90 = percentile(duration, 90), interval:1m
+```
+
+### 3 — Tile errores
 
 | | |
 |-|-|
-| **Dónde** | Mismo dashboard → **Add tile** |
-| **Acción** | Métrica **Failure rate** o **HTTP 5xx count** del servicio `demo-api` |
+| **Dónde** | Mismo dashboard → **+** → **DQL** |
+| **Acción** | Pega la consulta · visualización **Bar** o **Line** |
 | **Para qué** | Complementa M04-02 (Problems) |
 | **Validar** | Pico si ejecutaste `/fail` en la última hora |
 | **Comprender** | Correlaciona con Problems pero no lo sustituye |
 
-### 4 — Tile infra host
+```sql
+fetch spans
+| filter service.name == "demo-api" and request.is_root_span == true
+| makeTimeseries errores = countIf(request.is_failed == true), interval:1m
+```
+
+### 4 — Tile CPU del host
 
 | | |
 |-|-|
-| **Dónde** | **Add tile** → categoría **Infrastructure** / **Host** |
-| **Acción** | Selecciona el **host del Codespace** → métrica **CPU usage** o **Memory used** |
+| **Dónde** | Mismo dashboard → **+** → **DQL** |
+| **Acción** | Pega la consulta · visualización **Line** |
 | **Para qué** | Correlacionar saturación de VM con latencia de app |
 | **Validar** | CPU > 0% con lab activo |
 | **Comprender** | Host = raíz del árbol que viste en M03 |
+
+```sql
+timeseries cpu = avg(dt.host.cpu.usage), by:{dt.smartscape.host}
+```
 
 ### 5 — Guardar y compartir
 
 | | |
 |-|-|
 | **Dónde** | Barra superior del dashboard |
-| **Acción** | **Save** · opcional: enlace solo lectura si tu tenant lo permite |
+| **Acción** | Los cambios se guardan solos (icono de nube junto al título) · opcional: **Share** |
 | **Para qué** | Reutilizar tras el curso en tu fork |
-| **Validar** | Dashboard aparece en la lista **Dashboards** al recargar |
+| **Validar** | Dashboard aparece en **All dashboards** al recargar |
 | **Comprender** | Los dashboards viven en el tenant, no en el repo git |
 
 ## Comprueba tu entendimiento
@@ -90,7 +109,7 @@ Crea una **maintenance window** de 10 min sobre el host del lab. Observa si desa
 <details>
 <summary>Ver orientación</summary>
 
-Settings → Maintenance windows → Add. Selecciona host del Codespace. No abuses en producción real.
+Settings → General → Environment management → Maintenance windows → Add (o busca `maintenance` en Search settings). Selecciona host del Codespace. No abuses en producción real.
 
 </details>
 

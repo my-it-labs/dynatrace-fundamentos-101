@@ -7,7 +7,7 @@ import time
 
 import redis
 from flask import Flask, jsonify
-from psycopg2 import connect
+import psycopg2  # módulo, no la función: así la instrumentación OTel puede parchear connect
 
 app = Flask(__name__)
 
@@ -29,7 +29,7 @@ def work():
     hits = _redis_client().incr("lab:hits")
 
     db_url = os.environ.get("DATABASE_URL", "postgres://lab:lab@postgres:5432/lab")
-    with connect(db_url) as conn:
+    with psycopg2.connect(db_url) as conn:
         with conn.cursor() as cur:
             cur.execute("SELECT 1")
             cur.fetchone()

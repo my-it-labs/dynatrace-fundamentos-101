@@ -109,8 +109,8 @@ usuario/contraseña de login.
 **Opción A — Búsqueda global (recomendada)**
 
 1. <kbd>Ctrl</kbd>+<kbd>K</kbd> → escribe `Access tokens`.
-2. Abre el resultado **Access tokens** bajo **Settings** (no confundir con «Personal Access Tokens» del
-   usuario si solo quieres tokens de plataforma).
+2. Abre el resultado **Access Tokens** del grupo **Classic apps** (no confundir con «Personal Access
+   Tokens» del usuario). Se abre una página con barra superior de color y el botón **Generate new token**.
 
 **Opción B — Menú Settings**
 
@@ -200,28 +200,23 @@ Tienes **dos caminos**. Usa **A** si prefieres que Dynatrace marque los scopes; 
 
 **Resultado esperado:** Dos tokens distintos guardados en `.env` (no uses el PaaS de 2d en su lugar).
 
-#### Opción B — Manual en Access tokens
+#### Opción B — Plantillas en Access tokens
 
-**Acción:** Genera **dos** tokens en **Access tokens** (lista con **Generate new token**, no la pantalla de toggles en Environment segmentation):
+**Acción:** En **Access tokens** → **Generate new token**, genera **dos** tokens eligiendo en el desplegable
+**Template** la plantilla correspondiente (marca los scopes por ti):
 
-**Ingest (M04/M05):** nombre `curso-otel-ingest` → scope **`openTelemetryTrace.ingest`** (busca en el buscador de scopes).
+| Nombre sugerido | Template | Scopes que marca | Variable en `infra/.env` |
+|-----------------|----------|------------------|--------------------------|
+| `curso-operator-api` | **Kubernetes: Dynatrace Operator** | `activeGateTokenManagement.create`, `entities.read`, `settings.read`, `settings.write`, `DataExport`, `InstallerDownload` | `DYNATRACE_API_TOKEN=` |
+| `curso-ingest` | **Kubernetes: Data Ingest** | `logs.ingest`, `metrics.ingest`, `openTelemetryTrace.ingest` | `DYNATRACE_INGEST_TOKEN=` |
 
-**API (M05):** scopes `ReadConfig`, `WriteConfig` mínimo.
-
-1. **`curso-operator-api`** — tipo **API** con scopes mínimos:
-   - `ReadConfig`
-   - `WriteConfig`
-   - (si la UI lo ofrece) `ReadSettings`, `WriteSettings`
-2. **`curso-ingest`** — tipo **Ingest** / API con scopes:
-   - `metrics.ingest`
-   - `logs.ingest`
-   - `openTelemetryTrace.ingest`
+Pulsa **Generate token** en la barra inferior y copia el valor antes de salir.
 
 **Resultado esperado:** Dos tokens distintos asignados a `DYNATRACE_API_TOKEN` y `DYNATRACE_INGEST_TOKEN`.
 
 > [!TIP]
-> Si solo ves un tipo «API» genérico, crea **dos tokens API** con scopes distintos (lista de arriba).
-> Lo crítico es **no mezclar** PaaS con API/Ingest.
+> Lo crítico es **no mezclar** PaaS con Operator/Ingest. El token del Operator **no** sirve con
+> `ReadConfig`/`WriteConfig` sueltos: usa la plantilla.
 
 ---
 
@@ -329,7 +324,7 @@ El ID es el prefijo de la URL del tenant. El puerto 8080 aparece en la pestaña 
 | Mezclé tokens | Mismo valor en PaaS y API | Genera tres tokens **distintos** (pasos 2d y 2e) |
 | Perdí el token | Solo se muestra una vez al crear | Genera uno nuevo y actualiza `.env` |
 | OneAgent fallará en M03 | Token no es tipo PaaS | Regenera con plantilla **PaaS** (paso 2d) |
-| Operator fallará en M05 | API sin ReadConfig/WriteConfig | Regenera con asistente K8s o scopes del paso 2e |
+| Operator fallará en M05 | Token API creado a mano sin los scopes del Operator | Regenera con el asistente K8s (opción A) o la plantilla **Kubernetes: Dynatrace Operator** (opción B) |
 
 ---
 

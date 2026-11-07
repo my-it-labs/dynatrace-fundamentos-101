@@ -36,17 +36,17 @@ Clasificas entidades del lab y configuras (o documentas) una convención de nomb
 **Por qué:** En aulas con tenant compartido, el hostname es el filtro principal para «tu» lab.
 **Resultado esperado:** Hostname copiado para usarlo como filtro en búsquedas.
 
-### 3 — Naming rule (intro)
+### 3 — Convención de nombres (intro)
 
-**Acción:** Abre **Settings → Monitoring → Host naming** (ruta equivalente). Revisa reglas existentes. Si tu tenant lo permite, añade un prefijo descriptivo o documenta en tus notas: `lab-<tu-usuario>`.
+**Acción:** Abre **Settings** y busca `naming` en **Search settings**. En un tenant nuevo solo aparece **Request naming** (servicios); las antiguas reglas de *host naming* no existen. El nombre del host lo da el propio hostname (o el *host group* al instalar OneAgent). Documenta en tus notas la convención que usarías: `lab-<tu-usuario>`.
 **Por qué:** Evita ambigüedad si compartís tenant en un mismo equipo.
-**Resultado esperado:** Criterio de nombre documentado (regla que aplicas tú).
+**Resultado esperado:** Criterio de nombre documentado y sabes que en Latest Dynatrace se decide en origen, no con reglas de UI.
 
-### 4 — Management zone (visión)
+### 4 — Segments (visión)
 
-**Acción:** Navega a **Settings → Preferences → Management zones** y localiza la zona por defecto. Lee qué entidades incluye tu host.
-**Por qué:** M06 profundizará en zonas; aquí solo ubicación en la UI.
-**Resultado esperado:** Sabes dónde se configuran zonas; host visible en la zona default.
+**Acción:** Navega a **Settings → Environment segmentation → Segments**. Lee la descripción: un *segment* es un filtro reutilizable (p. ej. «solo mi host») que aplicas en cualquier app.
+**Por qué:** Los Segments sustituyen el filtrado de las antiguas *management zones*, que ya no existen en tenants nuevos. M06 vuelve sobre ello.
+**Resultado esperado:** Sabes dónde se configuran los Segments.
 
 ## Comprueba tu entendimiento
 
@@ -71,6 +71,5 @@ Ejemplo: Host = VM Codespace; Process = python en contenedor demo-api; Service =
 
 | Síntoma | Causa probable | Cómo arreglarlo |
 |---------|----------------|-----------------|
-| No encuentro Host naming | UI actualizada | Busca «host naming» en global search |
-| Regla no aplica retroactivamente | Comportamiento normal | Cambio afecta a descubrimientos nuevos |
+| No encuentro Host naming ni Management zones | Tenant nuevo (Latest Dynatrace) | Es normal: naming en origen y filtrado con **Segments** |
 | Veo hosts de otras personas | Tenant compartido | Filtra siempre por tu hostname |

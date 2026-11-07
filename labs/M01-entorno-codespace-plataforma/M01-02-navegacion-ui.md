@@ -62,8 +62,9 @@ tenant. Piensa en el dock como el menú de inicio y en cada app como un módulo 
 
 **Por qué:** Si no ubicas dock vs contenido, cada paso posterior parece magia. Este paso evita eso.
 
-**Resultado esperado:** Ves el dock a la izquierda y, en el centro, la página **Getting started**
-o **Launcher** (pantalla de bienvenida con bloques «OneAgent», «Explore apps», etc.).
+**Resultado esperado:** Ves el dock a la izquierda y, en el centro, la app **QuickStart**
+(«Get started: Add data into Dynatrace») — es lo que abre un trial recién creado. Al pulsar el logo
+Dynatrace del dock llegas al **Launcher** («Getting started with Dynatrace» + «Explore apps»).
 
 ![Launcher — pantalla de inicio](../img/M01-02-launcher-hub.png)
 

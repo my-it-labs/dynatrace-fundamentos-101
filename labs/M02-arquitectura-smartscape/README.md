@@ -26,7 +26,7 @@
 | **OneAgent** | Descubrimiento, instrumentación, envío de telemetría |
 | **ActiveGate** | Puente/proxy opcional (K8s, DB remotas, routing) |
 | **Grail** | Almacén analítico de logs, métricas, trazas, eventos |
-| **Davis AI** | Detección de anomalías, problems, causa raíz |
+| **Dynatrace Intelligence** (antes **Davis AI**) | Detección de anomalías, problems, causa raíz |
 | **Apps de plataforma** | Infrastructure, Distributed traces, Logs, Dashboards… |
 
 ### Entidades que verás en el lab

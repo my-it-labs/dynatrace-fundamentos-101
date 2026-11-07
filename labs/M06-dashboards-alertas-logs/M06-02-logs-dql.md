@@ -37,15 +37,23 @@ Abres el editor DQL, filtras logs del host/servicio del lab y relacionas una lí
 
 ```sql
 fetch logs
-| filter dt.entity.host.name == "<hostname-codespace>"
+| summarize registros = count(), by:{container.name}
+```
+
+Después quédate con los de demo-api:
+
+```sql
+fetch logs
+| filter container.name == "infra-demo-api-1"
 | sort timestamp desc
 | limit 20
 ```
 
-Sustituye `<hostname-codespace>` por el hostname visto en M02/M03.
+> En los logs, `host.name` es el identificador interno de la VM del Codespace, no el nombre
+> `codespaces-…` que ves en Infrastructure. Por eso filtramos por **contenedor**.
 
-**Por qué:** Acota resultados a tu VM de lab.
-**Resultado esperado:** Lista de eventos de log recientes del host.
+**Por qué:** Acota resultados a un componente de tu lab.
+**Resultado esperado:** Recuento por contenedor (`infra-demo-api-1`, `infra-demo-web-1`, `infra-postgres-1`…) y, en la segunda consulta, peticiones `GET /work`, `/fail`… de demo-api.
 
 ### 3 — Filtrar por contenido
 
@@ -67,11 +75,11 @@ fetch logs
 **Por qué:** Associate valora correlación log ↔ trace.
 **Resultado esperado:** Salto temporal coherente entre log y PurePath (cuando la plataforma lo permita).
 
-### 5 — Management zone (ubicación)
+### 5 — Segments (ubicación)
 
-**Acción:** Abre **Settings → Management zones**. Documenta en qué zona está tu host y si crearías una zona `lab` en un tenant compartido.
+**Acción:** Abre **Settings → Environment segmentation → Segments**. Documenta qué segment crearías (p. ej. `lab-<tu-usuario>` filtrando por tu host) para no mezclar datos en un tenant compartido.
 **Por qué:** Cierra el módulo operativo del curso básico.
-**Resultado esperado:** Sabes crear/asignar reglas de zona (aunque no la apliques en trial individual).
+**Resultado esperado:** Sabes dónde se crean los Segments y para qué sirven (aunque no lo apliques en trial individual).
 
 ## Comprueba tu entendimiento
 

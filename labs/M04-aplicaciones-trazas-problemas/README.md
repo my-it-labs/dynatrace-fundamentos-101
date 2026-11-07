@@ -17,7 +17,7 @@
 
 | Canal | Qué envía | Qué ves en UI |
 |-------|-----------|---------------|
-| **OneAgent** (contenedor) | Infra, procesos, HTTP superficial (nginx) | Process group `nginx`, `localhost:80` |
+| **OneAgent** (contenedor) | Infra, procesos, HTTP superficial (nginx) | Service `localhost:80` |
 | **OpenTelemetry** (demo-api) | Spans de Flask, Redis, Postgres | Service `demo-api`, vista **Spans** |
 
 ### Span y PurePath
@@ -26,7 +26,7 @@ Un **span** es un paso (HTTP, query SQL, llamada Redis). Un **PurePath** es la c
 
 ### Problems y Davis
 
-**Davis** correlaciona métricas y trazas. Endpoints del lab:
+**Davis** (desde 2026 la IA de la plataforma se llama **Dynatrace Intelligence**; en documentación y UI verás ambos nombres) correlaciona métricas y trazas. Endpoints del lab:
 
 | Endpoint | Efecto |
 |----------|--------|

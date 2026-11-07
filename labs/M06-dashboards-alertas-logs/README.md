@@ -9,7 +9,7 @@
 
 - Montar un **dashboard** operativo del lab (Compose + opcional K8s).
 - Investigar **logs** con **DQL** introductorio.
-- Configurar **maintenance window** y ubicar **management zones**.
+- Configurar **maintenance window** y ubicar **Segments**.
 
 ## Teoría
 
@@ -28,7 +28,7 @@ Lenguaje unificado para logs, métricas y spans en Grail. Ejemplo introductorio:
 
 ```sql
 fetch logs
-| filter matchesPhrase(content, "demo-api")
+| filter container.name == "infra-demo-api-1"
 | limit 20
 ```
 
@@ -36,7 +36,7 @@ La sintaxis exacta puede variar según versión; usa el editor con autocompletad
 
 ### Operación
 
-- **Management zones** — segmentan entidades por equipo/entorno.
+- **Segments** — filtros reutilizables por equipo/entorno (sustituyen a las antiguas *management zones*, que no existen en tenants nuevos).
 - **Maintenance windows** — suprimen alertas durante cambios planificados.
 
 ## Ahora practica tú

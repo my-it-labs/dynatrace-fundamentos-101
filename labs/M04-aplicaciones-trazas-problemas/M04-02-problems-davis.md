@@ -48,6 +48,26 @@ done
 **Por qué:** Problems es la vista operativa principal para incidentes automáticos.
 **Resultado esperado:** Al menos un problem relacionado con demo-api, latencia o failure rate.
 
+> [!IMPORTANT]
+> **Tenant recién creado:** Davis necesita *baseline* del servicio y puede **no abrir ningún
+> problem** aunque `/fail` devuelva 500 durante minutos (comprobado en un trial nuevo). Si a los
+> 5 min sigues con «No matching problems», usa el **plan B**.
+
+#### Plan B — Abrir un problem con un evento de error
+
+1. **Access tokens → Generate new token**, nombre `curso-events`, Template **None**, busca y marca
+   el scope **`events.ingest`** → **Generate token** → copia el valor.
+2. Pégalo en `infra/.env` como `DYNATRACE_EVENTS_TOKEN=`.
+3. Ejecuta:
+
+```bash
+./scripts/raise-problem.sh
+```
+
+**Resultado esperado:** `"status":"OK"` en la terminal y, en ~30 s, un problem
+**«Lab M04-02: demo-api devuelve HTTP 500»** (categoría **Error**, afecta al host `codespaces-…`).
+Sigue con los pasos 3–5 sobre ese problem.
+
 ### 3 — Analizar impacto
 
 **Acción:** Abre el problem. Lee **Impact** (servicios/host afectados) y **Severity**.
@@ -90,6 +110,6 @@ Davis usa baselines; al cesar `/fail`, la tasa de error debería normalizarse y 
 
 | Síntoma | Causa probable | Cómo arreglarlo |
 |---------|----------------|-----------------|
-| No aparece problem | Baseline aún aprendiendo | Repite carga 5+ min |
+| No aparece problem | Baseline aún aprendiendo (tenant nuevo) | Plan B: `./scripts/raise-problem.sh` |
 | Problem genérico | Mucho ruido en host | Filtra por servicio demo-api |
 | Root cause vacía | Pocos datos | Mantén carga + espera ingest |

@@ -58,7 +58,7 @@ Si falla → [TROUBLESHOOTING](../TROUBLESHOOTING.md#oneagent-no-arranca-o-reini
 | **Dónde** | Mismo host → pestaña **Processes** |
 | **Acción** | Localiza `api.py` / nginx · mira columna **Deep monitoring** |
 | **Para qué** | Anticipar por qué M04 necesita OTel |
-| **Validar** | `api.py`: *Not applicable* o *Failed*; nginx: a veces *Restart required* |
+| **Validar** | `api.py`: *Not applicable* o *Failed*; nginx: *Restart required* (arrancó antes que OneAgent; lo reinicias en el paso 5) |
 | **Comprender** | Infra **sí**, instrumentación profunda Flask **no garantizada** en Codespace |
 
 ![Deep monitoring](../img/M03-01-processes-deep-monitoring.png)
@@ -67,10 +67,10 @@ Si falla → [TROUBLESHOOTING](../TROUBLESHOOTING.md#oneagent-no-arranca-o-reini
 
 | | |
 |-|-|
-| **Dónde** | **Distributed Tracing** → filtro **Process group** = `nginx` |
-| **Acción** | Observa trazas `localhost:80` / `/` |
+| **Dónde** | Terminal, raíz del repo · luego **Distributed Tracing** → faceta **Service** = `localhost:80` |
+| **Acción** | Reinicia nginx para que OneAgent lo instrumente: `docker compose -f infra/docker-compose.yml restart demo-web`. Espera 1–2 min y observa trazas `localhost:80` / `/` |
 | **Para qué** | Prueba de que **algo** ya ingiere trazas (OneAgent) |
-| **Validar** | Filas con Process group `nginx` |
+| **Validar** | Filas con Service `localhost:80`; en **Processes**, nginx ya no marca *Restart required* |
 | **Comprender** | No confundir con demo-api; M04 instrumentará Flask |
 
 ---

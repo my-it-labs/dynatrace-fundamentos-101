@@ -14,7 +14,7 @@ Tras M03 deberías tener:
 |----------|--------|
 | OneAgent contenedor | Conectado; host y contenedores visibles en Infrastructure |
 | `infra/demo-web/api.py` | Flask **sin** OpenTelemetry |
-| Distributed Tracing | Trazas de **nginx** (`Process group` = `nginx`), no de Flask |
+| Distributed Tracing | Trazas de **nginx** (Service `localhost:80`), no de Flask |
 | `infra/.env` | `DYNATRACE_INGEST_TOKEN` con scope `openTelemetryTrace.ingest` |
 
 **No es un error** si Services está vacío o solo ves nginx: es el límite que descubriste en M03.
@@ -28,7 +28,7 @@ Tras M03 deberías tener:
 | | |
 |-|-|
 | **Dónde** | Dynatrace → <kbd>Ctrl</kbd>+<kbd>K</kbd> → **Distributed Tracing** → **Explorer** |
-| **Acción** | Filtro **Process group** = `nginx` · timeframe **Last 30 minutes** |
+| **Acción** | Faceta **Service** = `localhost:80` · timeframe **Last 30 minutes** |
 | **Para qué** | Ver qué observa OneAgent **sin** tocar código |
 | **Validar** | Filas con Service `localhost:80`, Endpoint `/` |
 | **Comprender** | Es tráfico loadgen → demo-web; **1 span** = solo capa nginx |
