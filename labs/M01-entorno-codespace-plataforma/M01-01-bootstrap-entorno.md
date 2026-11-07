@@ -122,7 +122,7 @@ usuario/contraseña de login.
 > Si solo ves **toggles** de configuración (sin lista ni botón generar), estás en Settings →
 > Environment segmentation. Usa <kbd>Ctrl</kbd>+<kbd>K</kbd> → `Access tokens` (app con lista AT).
 
-![Settings → Access tokens](../img/M01-01-access-tokens.png)
+![Access Tokens (Classic apps) — lista vacía con «Generate new token»](../img/M01-01-access-tokens.png)
 
 ---
 
