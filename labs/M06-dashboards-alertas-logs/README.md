@@ -39,6 +39,22 @@ La sintaxis exacta puede variar según versión; usa el editor con autocompletad
 - **Segments** — filtros reutilizables por equipo/entorno (sustituyen a las antiguas *management zones*, que no existen en tenants nuevos).
 - **Maintenance windows** — suprimen alertas durante cambios planificados.
 
+### Más allá de la UI: API REST, dtctl y MCP
+
+Todo lo que haces en este módulo (consultas DQL, dashboards, problemas) también es accesible sin
+navegador. Son tres formas de hablar con el mismo tenant:
+
+| Interfaz | Para quién | Ejemplo de uso |
+|----------|------------|----------------|
+| **API REST** | Scripts e integraciones | Lanzar una consulta DQL desde un pipeline CI/CD |
+| **dtctl** | Personas en terminal (estilo `kubectl`) | Consultar logs o gestionar dashboards desde la shell |
+| **MCP server** | Asistentes de IA (Claude, Copilot, Cursor…) | Preguntar en lenguaje natural «¿qué problemas abiertos hay?» |
+
+Las tres se autentican con **tokens** (como los de M01) o OAuth, y respetan los mismos permisos.
+No forman parte de los labs de este curso básico: son el siguiente paso natural para automatizar
+la operación. Proyectos de referencia: [Dynatrace/dtctl](https://github.com/Dynatrace/dtctl)
+y [dynatrace-oss/dynatrace-mcp](https://github.com/dynatrace-oss/dynatrace-mcp).
+
 ## Ahora practica tú
 
 | Lab | Título | Qué harás |

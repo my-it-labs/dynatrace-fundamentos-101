@@ -77,7 +77,7 @@ fetch logs
 
 ### 5 — Segments (ubicación)
 
-**Acción:** Abre **Settings → Environment segmentation → Segments**. Documenta qué segment crearías (p. ej. `lab-<tu-usuario>` filtrando por tu host) para no mezclar datos en un tenant compartido.
+**Acción:** Abre **Settings → Environment segmentation → Segments**. Documenta qué segment crearías (p. ej. `lab-<tu-usuario>` filtrando por tu host) como harías en un entorno real para que cada equipo vea solo sus datos.
 **Por qué:** Cierra el módulo operativo del curso básico.
 **Resultado esperado:** Sabes dónde se crean los Segments y para qué sirven (aunque no lo apliques en trial individual).
 
@@ -104,3 +104,7 @@ Guarda la consulta del paso 3 como favorita o snippet en el editor para reutiliz
 ## Cierre del curso
 
 Has completado el recorrido **M01–M06**. Conserva tu **fork** en GitHub: incluye labs, infra, scripts y tu `.env` local (nunca en git) para seguir practicando con tu tenant trial.
+
+**Siguientes pasos:** repite las consultas DQL de este lab fuera de la UI, por ejemplo con la API REST,
+el CLI **dtctl** o un asistente de IA conectado por **MCP**. Ver
+[M06 — Más allá de la UI](README.md#más-allá-de-la-ui-api-rest-dtctl-y-mcp).

@@ -57,6 +57,11 @@ Los scripts **no** usan tu usuario/contraseña de login. Necesitas **tres tokens
 | API | Dynatrace Operator (M05) |
 | Ingest | Trazas OTel (M04) y Grail (M05) |
 
+> [!TIP]
+> Los tokens son la puerta de la **API REST** del tenant: todo lo que ves en la UI también se puede
+> consultar o automatizar desde código, el CLI **dtctl** o un asistente de IA vía **MCP**.
+> En este curso trabajamos con la UI; lo retomamos en **[M06](../M06-dashboards-alertas-logs/README.md#más-allá-de-la-ui-api-rest-dtctl-y-mcp)**.
+
 > [!IMPORTANT]
 > No instalamos **Dynatrace Managed** en el Codespace. La plataforma vive en el trial SaaS; el
 > Codespace solo ejecuta tus apps y agentes.

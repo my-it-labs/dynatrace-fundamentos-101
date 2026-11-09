@@ -50,6 +50,29 @@ Host (Codespace)
 | Trial | Sí | Normalmente no |
 | Grail / funciones nuevas | Primero en SaaS | Dependiente de versión |
 
+### Varios equipos y entornos en Dynatrace (multi-tenant)
+
+En tu trial tienes **un entorno solo para ti**. En una empresa, Dynatrace se organiza en dos niveles:
+
+```text
+Cuenta Dynatrace (Account Management: usuarios, grupos, permisos, licencia)
+ ├── Entorno «producción»      → URL e ID propios (https://<id>.live.dynatrace.com)
+ └── Entorno «no producción»   → datos totalmente separados
+       └── Dentro de cada entorno, varios equipos conviven y se separan con:
+           host groups · tags · Segments · permisos (IAM) por equipo
+```
+
+| Nivel | Qué separa | Cuándo se usa |
+|-------|-----------|---------------|
+| **Entorno** (environment / tenant) | Todo: datos, configuración, tokens | Separación fuerte: pro vs no-pro, filiales, clientes |
+| **Host groups** | Agrupan hosts al instalar OneAgent (`--set-host-group`) | Dev / pre / pro dentro del mismo entorno |
+| **Tags** | Etiquetas en entidades (manuales o automáticas) | Equipo propietario, aplicación, coste |
+| **Segments** | Filtros reutilizables en cualquier app | Que cada equipo vea solo «lo suyo» |
+| **Permisos (IAM)** | Qué puede ver o cambiar cada grupo de usuarios | Acceso por equipo o por rol |
+
+> En este curso no necesitas nada de esto para que funcione el lab, porque el entorno es solo tuyo.
+> Lo verás de pasada en **M02-02** (naming), **M03-02** (host groups) y **M06** (Segments).
+
 ## Ahora practica tú
 
 > Completa **M03-01** antes de empezar estos labs.

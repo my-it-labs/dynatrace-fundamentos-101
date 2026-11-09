@@ -22,7 +22,7 @@ Diferenciar tipos de entidad en la UI y aplicar una regla de naming básica para
 
 ### En qué consiste
 
-Clasificas entidades del lab y configuras (o documentas) una convención de nombres para no mezclar entornos en un tenant compartido.
+Clasificas entidades del lab y configuras (o documentas) una convención de nombres como la que usarías en un entorno real con muchos hosts y equipos.
 
 ### 1 — Clasificar entidades
 
@@ -33,13 +33,13 @@ Clasificas entidades del lab y configuras (o documentas) una convención de nomb
 ### 2 — Hostname del Codespace
 
 **Acción:** Anota el hostname exacto del host en Dynatrace (suele coincidir con el nombre de la VM del Codespace).
-**Por qué:** En aulas con tenant compartido, el hostname es el filtro principal para «tu» lab.
+**Por qué:** En un entorno real con cientos de hosts, el hostname es el filtro más directo para llegar a una máquina concreta.
 **Resultado esperado:** Hostname copiado para usarlo como filtro en búsquedas.
 
 ### 3 — Convención de nombres (intro)
 
 **Acción:** Abre **Settings** y busca `naming` en **Search settings**. En un tenant nuevo solo aparece **Request naming** (servicios); las antiguas reglas de *host naming* no existen. El nombre del host lo da el propio hostname (o el *host group* al instalar OneAgent). Documenta en tus notas la convención que usarías: `lab-<tu-usuario>`.
-**Por qué:** Evita ambigüedad si compartís tenant en un mismo equipo.
+**Por qué:** En producción varios equipos y entornos conviven en el mismo tenant; una convención evita ambigüedad.
 **Resultado esperado:** Criterio de nombre documentado y sabes que en Latest Dynatrace se decide en origen, no con reglas de UI.
 
 ### 4 — Segments (visión)
@@ -72,4 +72,3 @@ Ejemplo: Host = VM Codespace; Process = python en contenedor demo-api; Service =
 | Síntoma | Causa probable | Cómo arreglarlo |
 |---------|----------------|-----------------|
 | No encuentro Host naming ni Management zones | Tenant nuevo (Latest Dynatrace) | Es normal: naming en origen y filtrado con **Segments** |
-| Veo hosts de otras personas | Tenant compartido | Filtra siempre por tu hostname |

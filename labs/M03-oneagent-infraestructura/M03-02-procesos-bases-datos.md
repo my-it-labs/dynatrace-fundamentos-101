@@ -83,7 +83,7 @@ Crea en Dynatrace un **host group** o convención de nombre (Settings → Monito
 <details>
 <summary>Ver orientación</summary>
 
-En trial individual puede bastar renombrar el host o documentar el hostname del Codespace. En tenant compartido, host groups evitan mezclar entornos.
+En tu trial basta con documentar el hostname del Codespace. En un entorno real con muchos hosts, los host groups evitan mezclar entornos (dev, pre, pro).
 
 </details>
 
@@ -94,7 +94,6 @@ En trial individual puede bastar renombrar el host o documentar el hostname del 
 | No aparece PostgreSQL/Redis | Detección aún en curso | Espera 5–10 min; confirma contenedores UP |
 | Proceso Python genérico | Sin nombre de servicio aún | Normal antes de M04; anota el PID/contenedor |
 | Métricas planas | loadgen parado | `docker compose -f infra/docker-compose.yml ps` |
-| Demasiados hosts | Tenant compartido sin grupos | Filtra por hostname del Codespace |
 
 ## Referencia
 
