@@ -40,8 +40,9 @@ Si el log contiene:
 
 **Causa:** Docker-in-Docker del Codespace no soporta el volumen persistente del instalador.
 
-**Solución:** Usa la versión actual de `scripts/oneagent-up.sh` (detecta Codespace/DinD y desactiva el volumen).
-Si aún falla, fija en `infra/.env`:
+**Solución:** Si lanzaste `docker run` a mano (M03-01 paso 2), comprueba que incluye
+`-e ONEAGENT_ENABLE_VOLUME_STORAGE=false`; borra el contenedor (`docker rm -f dynatrace-oneagent`) y
+relánzalo. `scripts/oneagent-up.sh` ya lo detecta solo. Si con el script aún falla, fija en `infra/.env`:
 
 ```bash
 ONEAGENT_ENABLE_VOLUME_STORAGE=false

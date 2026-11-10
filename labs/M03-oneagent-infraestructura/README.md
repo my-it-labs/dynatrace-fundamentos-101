@@ -25,7 +25,7 @@ En este curso usamos **full-stack monitoring** sobre Docker sin orquestador: One
 | Enfoque | Cuándo | En este curso |
 |---------|--------|---------------|
 | OneAgent en host Linux | VM/bare metal | Equivalente vía contenedor OA |
-| OneAgent como contenedor Docker | Docker sin K8s | **M03 — `scripts/oneagent-up.sh`** |
+| OneAgent como contenedor Docker | Docker sin K8s | **M03 — `docker run` a mano (M03-01 paso 2)** |
 | Dynatrace Operator | Kubernetes | **M05** |
 | Application-only (codemodules) | Sin acceso al host | No usamos |
 

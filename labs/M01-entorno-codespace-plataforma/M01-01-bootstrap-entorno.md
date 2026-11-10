@@ -140,7 +140,7 @@ usuario/contraseña de login.
 **Qué es esto:** Autoriza al contenedor `dynatrace/oneagent` del curso a **descargar e instalar**
 OneAgent en tu Codespace.
 
-**Por qué:** Sin PaaS token, `scripts/oneagent-up.sh` falla en M03 aunque Docker esté bien.
+**Por qué:** Sin PaaS token, OneAgent no puede descargar el instalador en M03 aunque Docker esté bien.
 
 **Resultado esperado:** Cadena larga (decenas de caracteres) guardada; pegarás en `.env` en el paso 3.
 
